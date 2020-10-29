@@ -256,7 +256,7 @@ void fluid_solver(p_params physical_params, t_data time_data, g_data grid_data, 
             //Central nodes
             for(int i = 2; i < n_ux_x - 1; ++i) {
                 for(int j = 1; j < n_ux_y - 1; ++j) {
-                	//Set velocities within object to zero
+                    //Set velocities within object to zero
                     bool set_zero = ((x_coord[i][j] - x_loc)*(x_coord[i][j] - x_loc) + (y_coord[i][j] - y_loc)*(y_coord[i][j] - y_loc)) < (R*R);
                     if(set_zero) {
                         ux[i][j] = 0.0;
@@ -280,10 +280,10 @@ void fluid_solver(p_params physical_params, t_data time_data, g_data grid_data, 
                     }
                     //Calc min and max
                     if(ux[i][j] > max_ux) {
-                    	max_ux = ux[i][j];
+                        max_ux = ux[i][j];
                     }
                     if(ux[i][j] < min_ux) {
-                    	min_ux = ux[i][j];
+                        min_ux = ux[i][j];
                     }
                 }
             }
@@ -362,7 +362,7 @@ void fluid_solver(p_params physical_params, t_data time_data, g_data grid_data, 
             //Central nodes
             for(int i = 1; i < n_uy_x - 1; ++i) {
                 for(int j = 1; j < n_uy_y - 1; ++j) {
-                	//Set velocities within object to zero
+                    //Set velocities within object to zero
                     bool set_zero = ((x_coord_uy[i][j] - x_loc)*(x_coord_uy[i][j] - x_loc) + (y_coord_uy[i][j] - y_loc)*(y_coord_uy[i][j] - y_loc)) < (R*R);
                     if(set_zero) {
                         uy[i][j] = 0.0;
@@ -383,10 +383,10 @@ void fluid_solver(p_params physical_params, t_data time_data, g_data grid_data, 
                     }
                     //Calc min and max
                     if(uy[i][j] > max_uy) {
-                    	max_uy = uy[i][j];
+                        max_uy = uy[i][j];
                     }
                     if(uy[i][j] < min_uy) {
-                    	min_uy = uy[i][j];
+                        min_uy = uy[i][j];
                     }
                 }
             }

@@ -9,23 +9,23 @@
 #define USER_TYPES_HPP_
 
 typedef struct physical_params {
-	double pin;
-	double pout;
-	double rho;
-	double mu;
+    double pin;
+    double pout;
+    double rho;
+    double mu;
 } p_params;
 
 typedef struct time_data {
-	double ti;
-	double tf;
-	int nt;
+    double ti;
+    double tf;
+    int nt;
 } t_data;
 
 typedef struct grid_data {
-	double L;
-	double W;
-	int n_p_x;
-	int n_p_y;
+    double L;
+    double W;
+    int n_p_x;
+    int n_p_y;
 } g_data;
 
 typedef struct solver_data {
@@ -41,9 +41,9 @@ typedef struct solver_data {
 } s_data;
 
 typedef struct object_data {
-	double x_loc;
-	double y_loc;
-	double R;
+    double x_loc;
+    double y_loc;
+    double R;
 } obj_data;
 
 #endif /* USER_TYPES_HPP_ */
