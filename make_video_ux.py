@@ -13,6 +13,9 @@ writer=manimation.FFMpegWriter(bitrate=20000, fps=15)
 
 fig = plt.figure(figsize=(8,8))
 
+max_and_min_data_file = 'max_and_min_ux.txt'
+max_ux, min_ux = np.genfromtxt(max_and_min_data_file, unpack=True)
+
 grid_data_file = 'grid_size.txt'
 nx, ny, nt = np.genfromtxt(grid_data_file, unpack=True)
 
@@ -40,8 +43,8 @@ def animate(i):
     ax.set_ylim(0, 0.1)
     #plt.ylim((0, 0.1))
     ax.set_zlabel('T')
-    ax.set_zlim(0.0, 0.13)
-    #plt.clim((0.0, 0.13))
+    ax.set_zlim(min_ux*1.01, max_ux*1.01)
+    #plt.clim((min_ux*1.01, max_ux*1.01))
     return ax
 
 size_t = nt-1

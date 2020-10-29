@@ -55,3 +55,9 @@ void export_solver_data(std::string file_prefix, double **f, int nx, int ny, int
     }
     myfile.close();
 }
+
+void export_max_and_min(std::string file_name, double max, double min) {
+	std::ofstream myfile(file_name);
+	myfile << max << " " << min;
+	myfile.close();
+}

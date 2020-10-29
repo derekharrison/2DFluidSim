@@ -100,6 +100,12 @@ void fluid_solver(p_params physical_params, t_data time_data, g_data grid_data, 
         }
 
     /* Start Gauss-Seidel iterations */
+    double max_ux, min_ux;
+    double max_uy, min_uy;
+    max_ux = -3e+8;
+    min_ux = 3e+8;
+    max_uy = -3e+8;
+    min_uy = 3e+8;
     int max_iter = 1000;
     int ts_counter = 0;
     while(ts_counter < nt) {
@@ -268,6 +274,17 @@ void fluid_solver(p_params physical_params, t_data time_data, g_data grid_data, 
                     duy_dx_s = (uy_o[i+1][j-1] - uy_o[i][j-1]) / del_x;
                     duy_dx_n = (uy_o[i+1][j] - uy_o[i][j]) / del_x;
                     ux[i][j] = (Smx + del_y*del_z*mu*2/del_x*ux[i-1][j] + del_y*del_z*mu*2/del_x*ux[i+1][j] + del_x*del_z*-mu*duy_dx_s + del_x*del_z*mu/del_y*ux[i][j-1] + del_x*del_z*mu*duy_dx_n + del_x*del_z*mu/del_y*ux[i][j+1] + del_x*del_y*del_z*rho/del_t*ux_o[i][j])/(del_y*del_z*mu*2/del_x + del_y*del_z*2*mu/del_x + del_x*del_z*mu/del_y + del_x*del_z*mu/del_y + del_x*del_y*del_z*rho/del_t);
+                    if(set_zero) {
+                        ux[i][j] = 0.0;
+                        ux_o[i][j] = 0.0;
+                    }
+                    //Calc min and max
+                    if(ux[i][j] > max_ux) {
+                    	max_ux = ux[i][j];
+                    }
+                    if(ux[i][j] < min_ux) {
+                    	min_ux = ux[i][j];
+                    }
                 }
             }
 
@@ -361,6 +378,16 @@ void fluid_solver(p_params physical_params, t_data time_data, g_data grid_data, 
                     dux_dy_w = (ux_o[i-1][j+1] - ux_o[i-1][j]) / del_y;
                     dux_dy_e = (ux_o[i][j+1] - ux_o[i][j]) / del_y;
                     uy[i][j] = (Smy + del_x*del_z*mu*2/del_y*uy[i][j-1] + del_x*del_z*mu*2/del_y*uy[i][j+1] + del_y*del_z*-mu*dux_dy_w + del_y*del_z*mu*dux_dy_e + del_y*del_z*mu/del_x*uy[i-1][j] + del_y*del_z*mu/del_x*uy[i+1][j] + del_x*del_y*del_z*rho/del_t*uy_o[i][j]) / (del_x*del_z*mu*2/del_y * 2 + del_y*del_z*mu/del_x * 2 + del_x*del_y*del_z*rho/del_t);
+                    if(set_zero) {
+                        uy[i][j] = 0.0;
+                    }
+                    //Calc min and max
+                    if(uy[i][j] > max_uy) {
+                    	max_uy = uy[i][j];
+                    }
+                    if(uy[i][j] < min_uy) {
+                    	min_uy = uy[i][j];
+                    }
                 }
             }
 
@@ -409,12 +436,14 @@ void fluid_solver(p_params physical_params, t_data time_data, g_data grid_data, 
         export_solver_data("data_ux_", ux, n_ux_x, n_ux_y, ts_counter);
         export_solver_data("data_x_", x_coord, n_ux_x, n_ux_y, ts_counter);
         export_solver_data("data_y_", y_coord, n_ux_x, n_ux_y, ts_counter);
+        export_max_and_min("max_and_min_ux.txt", max_ux, min_ux);
 
         //Export Uy data
         export_grid_data("grid_size_uy.txt", n_uy_x, n_uy_y, nt);
         export_solver_data("data_uy_", uy, n_uy_x, n_uy_y, ts_counter);
         export_solver_data("data_x_uy_", x_coord_uy, n_uy_x, n_uy_y, ts_counter);
         export_solver_data("data_y_uy_", y_coord_uy, n_uy_x, n_uy_y, ts_counter);
+        export_max_and_min("max_and_min_uy.txt", max_uy, min_uy);
 
         ts_counter++;
     }
