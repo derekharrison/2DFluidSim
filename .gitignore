@@ -1,0 +1,10 @@
+.settings/
+Debug/
+.cproject
+.project
+*aux
+*log
+*gz
+*tex
+*txt
+*mp4
