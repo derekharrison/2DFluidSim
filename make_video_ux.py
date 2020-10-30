@@ -33,19 +33,19 @@ def animate(i):
     print(i)
     fig.clear()
 
-    ax = fig.gca(projection='3d')
-    surf = ax.plot_surface(X_ref, Y_ref, UX_ref)
-    #cont = plt.contourf(X_ref, Y_ref, UX_ref)
-    ax.set_xlabel('X')
-    ax.set_xlim(0, 1)
-    #plt.xlim((0, 1))
-    ax.set_ylabel('Y')
-    ax.set_ylim(0, 0.1)
-    #plt.ylim((0, 0.1))
-    ax.set_zlabel('T')
-    ax.set_zlim(min_ux*1.01, max_ux*1.01)
-    #plt.clim((min_ux*1.01, max_ux*1.01))
-    return ax
+    #ax = fig.gca(projection='3d')
+    #surf = ax.plot_surface(X_ref, Y_ref, UX_ref)
+    cont = plt.contourf(X_ref, Y_ref, UX_ref, N=256)
+    #ax.set_xlabel('X')
+    #ax.set_xlim(0, 1)
+    plt.xlim((0, 1))
+    #ax.set_ylabel('Y')
+    #ax.set_ylim(0, 0.1)
+    plt.ylim((0, 0.1))
+    #ax.set_zlabel('T')
+    #ax.set_zlim(min_ux*1.01, max_ux*1.01)
+    plt.clim((min_ux*1.01, max_ux*1.01))
+    return cont
 
 size_t = nt-1
 anim = manimation.FuncAnimation(fig, animate, frames=size_t, repeat=False)

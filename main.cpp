@@ -30,8 +30,8 @@ int main(int argc, char* argv[]) {
     physical_params.mu = 0.01;    //Viscosity
 
     time_data.ti = 0.0;           //Initial simulation time
-    time_data.tf = 10.012;        //Final simulation time
-    time_data.nt = 225;            //Number of timesteps
+    time_data.tf = 15.012;        //Final simulation time
+    time_data.nt = 338;            //Number of timesteps
 
     grid_data.L = 1.0;            //Length of domain
     grid_data.W = 0.1;            //Width of domain
